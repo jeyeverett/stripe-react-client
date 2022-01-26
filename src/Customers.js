@@ -6,6 +6,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 export default function Customers() {
   const [user] = useAuthState(auth);
+  console.log(user);
 
   return (
     <div className="flex flex-col items-center xl:w-1/2 mx-auto">
@@ -33,9 +34,8 @@ export function SaveCard({ user }) {
   }, [user]);
 
   const createSetupIntent = async (event) => {
-    // const intent = await fetchFromAPI("wallet");
-    // setSetupIntent(intent);
-    setSetupIntent(true); // for testing
+    const intent = await fetchFromAPI("wallet");
+    setSetupIntent(intent);
   };
 
   const handleSubmit = async (event) => {
@@ -52,7 +52,7 @@ export function SaveCard({ user }) {
       alert(error.message);
       console.log(error);
     } else {
-      setSetupIntent(updatedSetupIntent);
+      setSetupIntent(null);
       await getWallet();
       alert("Success! Card added to your wallet.");
     }
@@ -104,7 +104,7 @@ export function SaveCard({ user }) {
           <h3 className="text-xl text-gray-700 font-medium mb-4">
             Retrieve Payment Sources
           </h3>
-          <select className="lg:w-3/4">
+          <select className="lg:w-3/4 px-2 py-1 border border-gray-300 rounded-sm">
             {wallet.map((paymentSource) => (
               <CreditCard card={paymentSource.card} key={paymentSource.id} />
             ))}
@@ -124,7 +124,7 @@ export function SaveCard({ user }) {
 function CreditCard(props) {
   const { last4, brand, exp_month, exp_year } = props.card;
   return (
-    <option>
+    <option className="px-2 py-1 text-gray-700">
       {brand} **** **** **** {last4} expires {exp_month}/{exp_year}
     </option>
   );

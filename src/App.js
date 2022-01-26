@@ -49,7 +49,9 @@ function App() {
 function Home() {
   return (
     <>
-      <h2>Stripe React + Node.js</h2>
+      <h2 className="text-3xl text-gray-700 font-semibold text-center">
+        Stripe React + Node.js
+      </h2>
     </>
   );
 }
