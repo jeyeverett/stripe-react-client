@@ -1,6 +1,4 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Checkout, CheckoutSuccess, CheckoutFail } from "./Checkout";
 import Payments from "./Payments";
 import Customers from "./Customers";
@@ -12,50 +10,36 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
+        <nav className="w-full mb-6 flex justify-end px-6 py-4 bg-gray-200">
+          <ul className="flex space-x-4 uppercase text-gray-700 font-semibold">
+            <li className="hover:text-gray-500 transition-all">
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li className="hover:text-gray-500 transition-all">
               <Link to="/checkout">Checkout</Link>
             </li>
-            <li>
+            <li className="hover:text-gray-500 transition-all">
               <Link to="/payments">Payments</Link>
             </li>
-            <li>
+            <li className="hover:text-gray-500 transition-all">
               <Link to="/customers">Customers</Link>
             </li>
-            <li>
+            <li className="hover:text-gray-500 transition-all">
               <Link to="/subscriptions">Subscriptions</Link>
             </li>
           </ul>
         </nav>
 
         <main>
-          <Switch>
-            <Route path="/checkout">
-              <Checkout />
-            </Route>
-            <Route path="/payments">
-              <Payments />
-            </Route>
-            <Route path="/customers">
-              <Customers />
-            </Route>
-            <Route path="/subscriptions">
-              <Subscriptions />
-            </Route>
-            <Route path="/success">
-              <CheckoutSuccess />
-            </Route>
-            <Route path="/failed">
-              <CheckoutFail />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/success" element={<CheckoutSuccess />} />
+            <Route path="/failed" element={<CheckoutFail />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
         </main>
       </div>
     </Router>
